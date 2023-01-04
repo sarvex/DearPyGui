@@ -107,6 +107,7 @@ The built-in demo shows all of Dear PyGui's functionality. Use [this code](https
 ## Resources
 
 - [API documentation](https://dearpygui.readthedocs.io/en/latest/index.html) :books: 
+- [Dear PyGui Extension](https://github.com/hoffstadt/DearPyGui_Ext)
 - [Development Roadmap](https://github.com/hoffstadt/DearPyGui/projects/4)
 - [FAQ](https://github.com/hoffstadt/DearPyGui/discussions/categories/frequently-asked-questions-faq)
 - [Feature Tracker](https://github.com/hoffstadt/DearPyGui/issues?q=is%3Aissue+is%3Aopen+label%3A%22type%3A+feature%22)
