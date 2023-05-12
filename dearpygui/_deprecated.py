@@ -209,17 +209,15 @@ def add_spacing(**kwargs):
 		Union[int, str]
 	"""
 
-	if 'count' in kwargs.keys():
-		count = kwargs["count"]
-		kwargs.pop("count", None)
-		internal_dpg.add_group(**kwargs)
-		internal_dpg.push_container_stack(internal_dpg.last_container())
-		for i in range(count):
-			internal_dpg.add_spacer()
-		result_id = internal_dpg.pop_container_stack()
-	else:
-		result_id = internal_dpg.add_spacer(**kwargs)
-	return result_id
+	if 'count' not in kwargs:
+		return internal_dpg.add_spacer(**kwargs)
+	count = kwargs["count"]
+	kwargs.pop("count", None)
+	internal_dpg.add_group(**kwargs)
+	internal_dpg.push_container_stack(internal_dpg.last_container())
+	for _ in range(count):
+		internal_dpg.add_spacer()
+	return internal_dpg.pop_container_stack()
 
 @deprecated("Use: add_spacer(...)")
 def add_dummy(**kwargs):

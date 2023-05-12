@@ -34,17 +34,11 @@ from dearpygui._dearpygui import mvMat4
 def run_callbacks(jobs):
     """ New in 1.2. Runs callbacks from the callback queue and checks arguments. """
 
-    if jobs is None:
-        pass
-    else:
+    if jobs is not None:
         for job in jobs:
-            if job[0] is None:
-                pass
-            else:
+            if job[0] is not None:
                 sig = inspect.signature(job[0])
-                args = []
-                for arg in range(len(sig.parameters)):
-                    args.append(job[arg+1])
+                args = [job[arg+1] for arg in range(len(sig.parameters))]
                 job[0](*args)
 
 def get_major_version():
@@ -80,8 +74,6 @@ def start_dearpygui():
 
     if not internal_dpg.is_viewport_ok():
         raise RuntimeError("Viewport was not created and shown.")
-        return
-
     while(internal_dpg.is_dearpygui_running()):
         internal_dpg.render_dearpygui_frame()   
 
@@ -117,10 +109,7 @@ def popup(parent: Union[int, str], mousebutton: int = internal_dpg.mvMouseButton
         item's uuid
     """
     try:
-        if tag == 0:
-            _internal_popup_id = internal_dpg.generate_uuid()
-        else:
-            _internal_popup_id = tag
+        _internal_popup_id = internal_dpg.generate_uuid() if tag == 0 else tag
         _handler_reg_id = internal_dpg.add_item_handler_registry()
         internal_dpg.add_item_clicked_handler(mousebutton, parent=internal_dpg.last_item(), callback=lambda: internal_dpg.configure_item(_internal_popup_id, show=True))
         internal_dpg.bind_item_handler_registry(parent, _handler_reg_id)

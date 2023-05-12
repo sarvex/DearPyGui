@@ -52,7 +52,7 @@ def _add_config_options(item, columns, *names, **kwargs):
         else:
             dpg.push_container_stack(dpg.add_table(header_row=False))
 
-        for i in range(columns):
+        for _ in range(columns):
             dpg.add_table_column()
 
         for i in range(int(len(names)/columns)):
@@ -82,43 +82,22 @@ def _create_static_textures():
    
     ## create static textures
     texture_data1 = []
-    for i in range(100*100):
-        texture_data1.append(255/255)
-        texture_data1.append(0)
-        texture_data1.append(255/255)
-        texture_data1.append(255/255)
-
+    for _ in range(100*100):
+        texture_data1.extend((1, 0, 1, 1))
     texture_data2 = []
-    for i in range(50*50):
-        texture_data2.append(255/255)
-        texture_data2.append(255/255)
-        texture_data2.append(0)
-        texture_data2.append(255/255)
-
+    for _ in range(50*50):
+        texture_data2.extend((1, 1, 0, 1))
     texture_data3 = []
-    for row in range(50):
-        for column in range(50):
-            texture_data3.append(255/255)
-            texture_data3.append(0)
-            texture_data3.append(0)
-            texture_data3.append(255/255)
-        for column in range(50):
-            texture_data3.append(0)
-            texture_data3.append(255/255)
-            texture_data3.append(0)
-            texture_data3.append(255/255)
-    for row in range(50):
-        for column in range(50):
-            texture_data3.append(0)
-            texture_data3.append(0)
-            texture_data3.append(255/255)
-            texture_data3.append(255/255)
-        for column in range(50):
-            texture_data3.append(255/255)
-            texture_data3.append(255/255)
-            texture_data3.append(0)
-            texture_data3.append(255/255)
-
+    for _ in range(50):
+        for _ in range(50):
+            texture_data3.extend((1, 0, 0, 1))
+        for _ in range(50):
+            texture_data3.extend((0, 1, 0, 1))
+    for _ in range(50):
+        for _ in range(50):
+            texture_data3.extend((0, 0, 1, 1))
+        for _ in range(50):
+            texture_data3.extend((1, 1, 0, 1))
     dpg.add_static_texture(100, 100, texture_data1, parent="__demo_texture_container", tag="__demo_static_texture_1", label="Static Texture 1")
     dpg.add_static_texture(50, 50, texture_data2, parent="__demo_texture_container", tag="__demo_static_texture_2", label="Static Texture 2")
     dpg.add_static_texture(100, 100, texture_data3, parent="__demo_texture_container", tag="__demo_static_texture_3", label="Static Texture 3")
@@ -127,19 +106,11 @@ def _create_dynamic_textures():
     
     ## create dynamic textures
     texture_data1 = []
-    for i in range(100*100):
-        texture_data1.append(255/255)
-        texture_data1.append(0)
-        texture_data1.append(255/255)
-        texture_data1.append(255/255)
-
+    for _ in range(100*100):
+        texture_data1.extend((1, 0, 1, 1))
     texture_data2 = []
-    for i in range(50*50):
-        texture_data2.append(255/255)
-        texture_data2.append(255/255)
-        texture_data2.append(0)
-        texture_data2.append(255/255)
-
+    for _ in range(50*50):
+        texture_data2.extend((1, 1, 0, 1))
     dpg.add_dynamic_texture(100, 100, texture_data1, parent="__demo_texture_container", tag="__demo_dynamic_texture_1")
     dpg.add_dynamic_texture(50, 50, texture_data2, parent="__demo_texture_container", tag="__demo_dynamic_texture_2")
 
@@ -153,20 +124,14 @@ def _update_dynamic_textures(sender, app_data, user_data):
 
     if user_data == 1:
         texture_data = []
-        for i in range(100*100):
-            texture_data.append(new_color[0])
-            texture_data.append(new_color[1])
-            texture_data.append(new_color[2])
-            texture_data.append(new_color[3])
+        for _ in range(100*100):
+            texture_data.extend((new_color[0], new_color[1], new_color[2], new_color[3]))
         dpg.set_value("__demo_dynamic_texture_1", texture_data)
 
     elif user_data == 2:
         texture_data = []
-        for i in range(50*50):
-            texture_data.append(new_color[0])
-            texture_data.append(new_color[1])
-            texture_data.append(new_color[2])
-            texture_data.append(new_color[3])
+        for _ in range(50*50):
+            texture_data.extend((new_color[0], new_color[1], new_color[2], new_color[3]))
         dpg.set_value("__demo_dynamic_texture_2", texture_data)
 
 def _on_demo_close(sender, app_data, user_data):
@@ -192,15 +157,15 @@ def _on_demo_close(sender, app_data, user_data):
     dpg.delete_item("__demo_item_reg7")
     dpg.delete_item("demoitemregistry")
     for i in range(7):
-        dpg.delete_item("__demo_theme"+str(i))
-        dpg.delete_item("__demo_theme2_"+str(i))
+        dpg.delete_item(f"__demo_theme{str(i)}")
+        dpg.delete_item(f"__demo_theme2_{str(i)}")
     for i in range(5):
-        dpg.delete_item("__demo_item_reg1_"+str(i))
-        dpg.delete_item("__demo_item_reg2_"+str(i))
+        dpg.delete_item(f"__demo_item_reg1_{str(i)}")
+        dpg.delete_item(f"__demo_item_reg2_{str(i)}")
     for i in range(3):
-        dpg.delete_item("__demo_item_reg4_"+str(i))
+        dpg.delete_item(f"__demo_item_reg4_{str(i)}")
     for i in range(4):
-        dpg.delete_item("__demo_item_reg5_"+str(i))
+        dpg.delete_item(f"__demo_item_reg5_{str(i)}")
 
 def show_demo():
 
